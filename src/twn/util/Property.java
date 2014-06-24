@@ -8,6 +8,12 @@ public class Property<T> {
 	private final Object eventOwner = new Object();
 	public final Event<PropertyChangedEventArgs<T>> propertyChanged = new Event<>(eventOwner);
 	
+	public Property(){}
+	
+	public Property (T initValue) {
+		set(initValue);
+	}
+	
 	public T get() {
 		return value;
 	}

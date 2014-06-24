@@ -13,7 +13,7 @@ public class SetOnce<T> {
 		return isSet;
 	}
 	
-	public T Value(){
+	public T value(){
 		return value;
 	}
 	
