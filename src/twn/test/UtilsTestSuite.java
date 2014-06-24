@@ -5,7 +5,5 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({CastTest.class})
-public class LangTestSuite {
-
-}
+@SuiteClasses({ArrayTest.class, CastTest.class, ClazzTest.class, EventTest.class, TupleTest.class})
+public class UtilsTestSuite {}
