@@ -1,4 +1,4 @@
-package twn.util;
+package twn.lang;
 
 public class SetOnce<T> {
 	private boolean isSet = false;

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import twn.lang.Clazz;
+import twn.util.Clazz;
 
 public class ClazzTest {
 

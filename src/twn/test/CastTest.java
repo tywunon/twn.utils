@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import twn.lang.Cast;
+import twn.util.Cast;
 
 public class CastTest {
 	

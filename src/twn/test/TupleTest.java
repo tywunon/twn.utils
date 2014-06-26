@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import twn.util.Tuple.*;
+import twn.lang.Tuple.*;
 
 public class TupleTest {
 	Object o1;

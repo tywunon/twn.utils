@@ -1,4 +1,4 @@
-package twn.lang;
+package twn.util;
 
 import java.io.File;
 import java.io.FileInputStream;

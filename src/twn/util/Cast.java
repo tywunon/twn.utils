@@ -1,4 +1,4 @@
-package twn.lang;
+package twn.util;
 
 public final class Cast {
 	public final static <T> T as(Object obj, Class<T> clazz){

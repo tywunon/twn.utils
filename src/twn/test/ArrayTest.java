@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import twn.lang.Array;
+import twn.util.Array;
 
 public class ArrayTest {
 	@Test

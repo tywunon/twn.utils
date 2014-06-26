@@ -1,4 +1,4 @@
-package twn.util;
+package twn.lang;
 
 import twn.evt.Event;
 import twn.evt.EventArgs;

@@ -1,4 +1,4 @@
-package twn.lang;
+package twn.util;
 
 public class Array {
 	public static <From, To> To[] arryToArry(Class<To> toType, From[] fromArray, Converter<From, To> converter) {

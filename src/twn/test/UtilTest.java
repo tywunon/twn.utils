@@ -3,8 +3,8 @@ package twn.test;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import twn.util.Property;
-import twn.util.SetOnce;
+import twn.lang.Property;
+import twn.lang.SetOnce;
 
 public class UtilTest {
 

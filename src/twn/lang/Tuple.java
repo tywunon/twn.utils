@@ -1,4 +1,4 @@
-package twn.util;
+package twn.lang;
 
 public class Tuple {
 	public static class Tuple1<T1> {
