@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class Collection {
-	public static <T> java.util.Set<T> fromSingle(T item) {
+	public static <T> java.util.Collection<T> fromItem(T item) {
 		HashSet<T> set = new HashSet<>();
 		set.add(item);
 		return set;
