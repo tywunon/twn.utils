@@ -2,6 +2,10 @@ package twn.lang;
 
 import java.lang.reflect.Field;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import twn.evt.Event;
 import twn.evt.EventArgs;
@@ -12,6 +16,8 @@ public class Property<T> {
 	private T value;
 	private final Object eventOwner = new Object();
 	public final Event<PropertyChangedEventArgs<T>> propertyChanged = new Event<>(eventOwner);
+	public BiFunction<T, T, Boolean> willSet = null;
+	public BiConsumer<T, T> didSet = null;
 	
 	public Property() {}
 	
@@ -23,22 +29,30 @@ public class Property<T> {
 		return value;
 	}
 	
-	public void set(T value){
-		if(value != this.value){
-			T oldValue = this.value;
+	public void set(T value) {
+		T oldValue = this.value;
+		T newValue = value;
+		if(willSet != null){
+			if(!willSet.apply(oldValue, newValue))
+				return;
+		}
+		if(oldValue != newValue){
 			this.value = value;
-			propertyChanged.fire(eventOwner, this, new PropertyChangedEventArgs<T>(value, oldValue));
+			propertyChanged.fire(eventOwner, this, new PropertyChangedEventArgs<T>(oldValue, newValue));
+		}
+		if(didSet != null) {
+			didSet.accept(oldValue, newValue);
 		}
 	}
 	
 	public static class PropertyChangedEventArgs<T> extends EventArgs {
-		public final T newValue;
 		public final T oldValue;
+		public final T newValue;
 		
-		public PropertyChangedEventArgs(T newValue, T oldValue) {
+		public PropertyChangedEventArgs(T oldValue, T newValue) {
 			super(false);
-			this.newValue = newValue;
 			this.oldValue = oldValue;
+			this.newValue = newValue;
 		}
 	}
 	
