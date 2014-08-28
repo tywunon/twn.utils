@@ -10,6 +10,12 @@ import twn.evt.EventArgs;
 import twn.util.Cast;
 import twn.util.Clazz;
 
+/**
+ * The Class Property contains a single value of any Type. The value can be set or received and will always fire an event when the value changes.
+ * It is recommended to declare all references to this class final.
+ *
+ * @param <T> the generic type
+ */
 public class Property<T> {
 	private T value;
 	private final Object eventOwner = new Object();
@@ -23,10 +29,20 @@ public class Property<T> {
 		set(initValue);
 	}
 	
+	/**
+	 * Gets the value.
+	 *
+	 * @return Property value
+	 */
 	public T get() {
 		return value;
 	}
 	
+	/**
+	 * Sets the value.
+	 *
+	 * @param value the new Property value
+	 */
 	public void set(T value) {
 		T oldValue = this.value;
 		T newValue = value;
@@ -43,6 +59,11 @@ public class Property<T> {
 		}
 	}
 	
+	/**
+	 * The Class PropertyChangedEventArgs is the value delivered by the propertyChanged event from the Property class.
+	 *
+	 * @param <T> the generic type
+	 */
 	public static class PropertyChangedEventArgs<T> extends EventArgs {
 		public final T oldValue;
 		public final T newValue;
@@ -54,16 +75,25 @@ public class Property<T> {
 		}
 	}
 	
+	/**
+	 * The Class PropertyContainer is supposed to be derived by any other class that uses the Property class.
+	 * It will provide an event lock, an containerChanged event and will automatically register to all propertyChanged events. 
+	 * And fire it's own containerChanged, when one property changes.
+	 * Therefore the derived class should call initProperty after all it's fields of class Property are initialized.
+	 */
 	public static abstract class PropertyContainer {
 		
-		private final Object eventOwner;
+		private final Object eventLock;
 		public final Event<PropertyContainerChangedArgs> containerChanged;
 		
 		protected PropertyContainer() {
-			eventOwner = new Object();
-			containerChanged = new Event<>(eventOwner);
+			eventLock = new Object();
+			containerChanged = new Event<>(eventLock);
 		}
 		
+		/**
+		 * Call this to register to all initialized Properties propertyChanged events.
+		 */
 		protected final void initPropertys() {
 			Set<Field> fields = Clazz.getAllFields(this.getClass());
 			fields.stream()
@@ -89,6 +119,9 @@ public class Property<T> {
 			);
 		}
 		
+		/**
+		 * This Method will be registered as handle for all Properties declared in derived classes
+		 */
 		protected final void propertyChanged(Object sender, PropertyChangedEventArgs<?> args) {
 			Clazz.getAllFields(this.getClass()).stream()
 			.filter(
@@ -115,7 +148,7 @@ public class Property<T> {
 		}
 		
 		protected final <T> void raiseModelObjectChanged(String propertyName, T oldValue, T newValue){
-			containerChanged.fire(eventOwner, this, new PropertyContainerChangedArgs(this, propertyName, newValue.getClass(), oldValue, newValue));
+			containerChanged.fire(eventLock, this, new PropertyContainerChangedArgs(this, propertyName, newValue.getClass(), oldValue, newValue));
 		}
 	}
 	

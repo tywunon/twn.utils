@@ -36,7 +36,7 @@ public class Logger {
 	
 	public static void log(Object obj) {
 		if(obj == null) log("null");
-		log(obj.toString());
+		else log(obj.toString());
 	}
 	
 	public static void log(String msg) {
