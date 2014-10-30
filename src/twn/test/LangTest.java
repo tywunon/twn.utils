@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import twn.lang.Property;
 import twn.lang.Property.PropertyContainer;
-import twn.lang.Property.PropertyContainerChangedArgs;
+import twn.lang.Property.PropertyChangedArgs;
 import twn.lang.SetOnce;
 
 public class LangTest {
@@ -20,7 +20,7 @@ public class LangTest {
 		assertEquals("null without initValue", null, string.get());
 		string = new Property<>("Hello");
 		assertEquals("InitValue?", "Hello", string.get());
-		string.propertyChanged.subscribe((sender, args) -> assertTrue(expectEvent));
+		string.valueChanged.subscribe((sender, args) -> assertTrue("change event fired", expectEvent));
 		string.set("Hello");
 		assertEquals("still InitValue?", "Hello", string.get());
 		expectEvent = true;
@@ -29,18 +29,18 @@ public class LangTest {
 	}
 	
 	@Test
-	public void testPropertyChanged() {
+	public void testValueChanged() {
 		expectEvent = false;
 		eventRecieved = false;
 		TestPropertyContainer tpc = new TestPropertyContainer();
-		tpc.containerChanged.subscribe(this::handleContainerChanged);
+		tpc.propertyChanged.subscribe(this::handlePropertyChanged);
 		expectEvent = true;
 		tpc.string.set("settet");
 		assertTrue(eventRecieved);
 		
 	}
 	
-	public void handleContainerChanged(Object sender, PropertyContainerChangedArgs args) {
+	public void handlePropertyChanged(Object sender, PropertyChangedArgs args) {
 		eventRecieved = true; 
 		assertTrue(expectEvent);
 		assertEquals("init", args.oldValue); 

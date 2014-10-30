@@ -12,7 +12,7 @@ public class SetOnce<T> {
 	private T value = null;
 
 	/**
-	 * Instantiates a new sets the once.
+	 * Instantiates a new SetOnce.
 	 */
 	public SetOnce() {}
 	
