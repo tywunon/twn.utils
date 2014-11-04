@@ -13,7 +13,7 @@ import twn.util.Clazz;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Property contains a single value of any Type. The value can be set or received and will always fire an event when the value changes.
- * It is recommended to declare all references to this class final.
+ * It is recommended to declare all usages to this class final.
  *
  * @param <T> the generic type
  */
@@ -52,7 +52,52 @@ public class Property<T> {
 		set(initValue);
 	}
 	
+	/**
+	 * Instantiates a new property.
+	 *
+	 * @param willSet the will set Delegate
+	 */
+	public Property(BiFunction<T, T, Boolean> willSet) {
+		this.willSet = willSet;
+	}
 	
+	/**
+	 * Instantiates a new property.
+	 *
+	 * @param didSet the did set Delegate
+	 */
+	public Property(BiConsumer<T, T> didSet) {
+		this.didSet = didSet;
+	}
+	
+	
+	
+	/**
+	 * Instantiates a new property.
+	 *
+	 * @param willSet the will set
+	 * @param didSet the did set
+	 */
+	public Property(BiFunction<T, T, Boolean> willSet, BiConsumer<T, T> didSet) {
+		this.willSet = willSet;
+		this.didSet = didSet;
+	}
+	
+	/**
+	 * Instantiates a new property.
+	 *
+	 * @param value the value
+	 * @param willSet the will set
+	 * @param didSet the did set
+	 */
+	public Property(T value, BiFunction<T, T, Boolean> willSet,
+			BiConsumer<T, T> didSet) {
+		super();
+		this.value = value;
+		this.willSet = willSet;
+		this.didSet = didSet;
+	}
+
 	/**
 	 * Gets the Value
 	 *
@@ -211,7 +256,7 @@ public class Property<T> {
 		/** The container. */
 		public final PropertyContainer container;
 		
-		/** The propertyname. */
+		/** The property name. */
 		public final String property;
 		
 		/** The value type. */
