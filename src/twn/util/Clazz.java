@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
-public class Clazz {
-	public static Set<Field> getAllFields(Class<?> clazz) {
+public final class Clazz {
+	public final static Set<Field> getAllFields(Class<?> clazz) {
 		Set<Field> fields = new HashSet<Field>();
 		while (clazz != null) {
 			fields.addAll(Arrays.asList(clazz.getDeclaredFields()));
@@ -22,7 +22,7 @@ public class Clazz {
 		return fields;
 	}
 
-	public static boolean hasField(Class<?> clazz, String fieldName) {
+	public final static boolean hasField(Class<?> clazz, String fieldName) {
 		Set<Field> fields = getAllFields(clazz);
 		for (Field f : fields) {
 			if (f.getName().equals(fieldName))
@@ -31,7 +31,7 @@ public class Clazz {
 		return false;
 	}
 
-	private static String stripFilenameExtension(String filename) {
+	private final static String stripFilenameExtension(String filename) {
 		int i = filename.lastIndexOf('.');
 		if (i > 0) {
 			return filename.substring(0, i);
@@ -40,7 +40,7 @@ public class Clazz {
 		}
 	}
 
-	static Set<Class<?>> getFromDirectory(File directory, String packageName) {
+	final static Set<Class<?>> getFromDirectory(File directory, String packageName) {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		if (directory.exists()) {
 			for (String file : directory.list()) {
@@ -61,7 +61,7 @@ public class Clazz {
 		return classes;
 	}
 
-	static Set<Class<?>> getFromJARFile(String jar, String packageName) {
+	final static Set<Class<?>> getFromJARFile(String jar, String packageName) {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		JarInputStream jarFile = null;
 		try {
@@ -92,7 +92,7 @@ public class Clazz {
 		return classes;
 	}
 
-	public static Set<Class<?>> getClassesOfPackage(String packageName,
+	public final static Set<Class<?>> getClassesOfPackage(String packageName,
 			boolean includeSubPackages) {
 		//Set of found Classes
 		Set<Class<?>> classes = new HashSet<Class<?>>();
@@ -148,16 +148,16 @@ public class Clazz {
 		return classes;
 	}
 
-	public static Set<Class<?>> getClassesOfPackage(Package _package,
+	public final static Set<Class<?>> getClassesOfPackage(Package _package,
 			boolean includeSubPackages) {
 		return getClassesOfPackage(_package.getName(), includeSubPackages);
 	}
 
-	public static Set<Class<?>> getClassesOfPackage(String packageName) {
+	public final static Set<Class<?>> getClassesOfPackage(String packageName) {
 		return getClassesOfPackage(packageName, packageName.endsWith(".*"));
 	}
 
-	public static Set<Class<?>> getClassesOfPackage(Package _package) {
+	public final static Set<Class<?>> getClassesOfPackage(Package _package) {
 		return getClassesOfPackage(_package.getName());
 	}
 }
