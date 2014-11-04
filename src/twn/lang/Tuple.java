@@ -1,10 +1,10 @@
 package twn.lang;
 
 /**
- * The Class Tuple provides tuples from one value to eight value tuples.
+ * The interface Tuple provides tuples from one value to eight value tuples.
  * All Tuples need to be initialized by the constructor and it's values can't be changed.
  */
-public class Tuple {
+public interface Tuple {
 	public static class Tuple1<T1> {
 
 		public final T1 item1;

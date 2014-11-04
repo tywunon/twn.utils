@@ -30,11 +30,15 @@ public class Property<T> {
 	
 	/**
 	 * The willSet function will be called whenever the set method is called as long as willSet is not null, otherwise willSet is ignored. If willSet returns false the setting attempt will be aborted.
+	 * The apply method will be called with the old and the new Value. <br>
+	 * <code>willSet.accept(oldValue, newValue)</code>
 	 */
 	public BiFunction<T, T, Boolean> willSet = null;
 	
 	/**
 	 * The didSet function will be called whenever the set method is called and the willSet function returns true or is null, regardless if the current value was set to a new value or not.
+	 * The accept method will be called with the old and the new Value. <br>
+	 * <code>didSet.accept(oldValue, newValue)</code>
 	 */
 	public BiConsumer<T, T> didSet = null;
 	
@@ -55,7 +59,7 @@ public class Property<T> {
 	/**
 	 * Instantiates a new property.
 	 *
-	 * @param willSet the will set Delegate
+	 * @param willSet the will set function
 	 */
 	public Property(BiFunction<T, T, Boolean> willSet) {
 		this.willSet = willSet;
@@ -64,7 +68,7 @@ public class Property<T> {
 	/**
 	 * Instantiates a new property.
 	 *
-	 * @param didSet the did set Delegate
+	 * @param didSet the did set function
 	 */
 	public Property(BiConsumer<T, T> didSet) {
 		this.didSet = didSet;
@@ -257,7 +261,7 @@ public class Property<T> {
 		public final PropertyContainer container;
 		
 		/** The property name. */
-		public final String property;
+		public final String propertyName;
 		
 		/** The value type. */
 		public final Class<?> valueType;
@@ -272,15 +276,15 @@ public class Property<T> {
 		 * Instantiates a new property changed args.
 		 *
 		 * @param container the container
-		 * @param property the property
+		 * @param propertyName the property
 		 * @param valueType the value type
 		 * @param oldValue the old value
 		 * @param newValue the new value
 		 */
-		public PropertyChangedArgs(PropertyContainer container, String property, Class<?> valueType, Object oldValue, Object newValue) {
+		public PropertyChangedArgs(PropertyContainer container, String propertyName, Class<?> valueType, Object oldValue, Object newValue) {
 			super(false);
 			this.container = container;
-			this.property = property;
+			this.propertyName = propertyName;
 			this.valueType = valueType;
 			this.oldValue = oldValue;
 			this.newValue = newValue;
