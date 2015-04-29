@@ -78,9 +78,7 @@ public class Event<T extends EventArgs> {
 			return;
 		}
 		eventArgs.overrideSender(sender);
-		for (IEventHandler<T> eventHandler : handler) {
-			eventHandler.handleEvent(sender, eventArgs);
-		}
+		handler.forEach((eventHandler) -> eventHandler.handleEvent(sender, eventArgs));
 		if (eventArgs.isNotHandled() && eventArgs.shouldBeHandled) {
 			IllegalEventOperationException
 					.throwCatchAndPrintNewIllegalEventOperationException("Event of Type \""

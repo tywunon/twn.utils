@@ -85,7 +85,6 @@ public class Logger {
 		message += "\n";
 		try {
 			outStream.write(message.getBytes());
-		} catch (IOException e) {
-		}
+		} catch (IOException e) { }
 	}
 }
