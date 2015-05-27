@@ -11,7 +11,7 @@ public final class Array {
 		return toArray;
 	}
 	
-	public final static Boolean[] convertPrimToInteger(boolean[] values) {
+	public final static Boolean[] convertPrimToWrapper(boolean[] values) {
 		Boolean[] result = new Boolean[values.length];
 		for(int i=0; i<values.length;i++) {
 			result[i] = values[i];
@@ -19,7 +19,7 @@ public final class Array {
 		return result;
 	}
 	
-	public final static Character[] convertPrimToInteger(char[] values) {
+	public final static Character[] convertPrimToWrapper(char[] values) {
 		Character[] result = new Character[values.length];
 		for(int i=0; i<values.length;i++) {
 			result[i] = values[i];
@@ -27,7 +27,7 @@ public final class Array {
 		return result;
 	}
 	
-	public final static Byte[] convertPrimToInteger(byte[] values) {
+	public final static Byte[] convertPrimToWrapper(byte[] values) {
 		Byte[] result = new Byte[values.length];
 		for(int i=0; i<values.length;i++) {
 			result[i] = values[i];
