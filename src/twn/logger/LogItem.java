@@ -1,6 +1,6 @@
 package twn.logger;
 
-public class LogItem {
+class LogItem {
 	public final long timestamp;
 	public final String message;
 	
