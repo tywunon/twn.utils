@@ -124,12 +124,17 @@ public class Property<T> {
 				return;
 		}
 		if(oldValue != newValue){
-			this.value = value;
+			this.value = newValue;
 			valueChanged.fire(eventLock, this, new ValueChangedEventArgs<T>(oldValue, newValue));
 		}
 		if(didSet != null) {
 			didSet.accept(oldValue, newValue);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("Property %s: %s", value.getClass().getSimpleName(), value);
 	}
 	
 	/**
@@ -186,9 +191,7 @@ public class Property<T> {
 		protected final void initPropertys() {
 			Set<Field> fields = Clazz.getAllFields(this.getClass());
 			fields.stream()
-			.filter(
-					(f) -> f.getType().equals(Property.class)
-					)
+			.filter((f) -> f.getType().equals(Property.class))
 			.forEach(
 					(f) -> {
 						boolean accessible = f.isAccessible();
@@ -232,11 +235,7 @@ public class Property<T> {
 					return result;
 				}
 			)
-			.forEach(
-				(f) -> {
-					raisePropertyChanged(f.getName(), args.oldValue, args.newValue);
-				}
-			);
+			.forEach((f) -> { raisePropertyChanged(f.getName(), args.oldValue, args.newValue); });
 		}
 		
 		/**
