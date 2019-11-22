@@ -1,4 +1,4 @@
-package twn.ui;
+package twn.ui.swing.searchField;
 
 import java.awt.Color;
 import java.awt.event.FocusEvent;

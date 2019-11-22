@@ -4,7 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import twn.ui.searchField.SearchField;
+import twn.ui.swing.searchField.SearchField;
 
 public class UITest {
 

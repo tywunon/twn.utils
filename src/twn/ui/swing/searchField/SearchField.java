@@ -1,12 +1,10 @@
-package twn.ui.searchField;
+package twn.ui.swing.searchField;
 
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 
 import javax.swing.JLayeredPane;
 import javax.swing.OverlayLayout;
-
-import twn.ui.LabeledTextField;
 
 public class SearchField extends LabeledTextField {
 	private static final long serialVersionUID = 1512201384940392521L;
